@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, jsonify
 from gtts import gTTS
 import io
@@ -25,3 +26,6 @@ def tts():
     # convert to base64
     audio_base64 = base64.b64encode(mp3_fp.read()).decode('utf-8')
     return jsonify({"audio_base64": audio_base64})
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))  # Use Render's PORT if available
+    app.run(host="0.0.0.0", port=port)
